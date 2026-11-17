@@ -1,0 +1,11 @@
+{
+  "name": "print-orient-lab",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "sample": "node tools/gen-sample.mjs",
+    "verify": "node bench/verify.mjs",
+    "bench": "node bench/bench.mjs"
+  }
+}

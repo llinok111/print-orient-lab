@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>print-orient-lab — exact build-orientation search</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #0d1117; color: #d7dde5; font: 13px/1.45 ui-sans-serif, system-ui, sans-serif; }
+    #app { position: fixed; inset: 0; }
+    #hud { position: fixed; top: 14px; left: 14px; width: 320px; padding: 14px 16px; border: 1px solid #253044;
+      background: rgba(13,17,23,.9); border-radius: 10px; backdrop-filter: blur(4px); }
+    h1 { font-size: 15px; margin: 0 0 2px; letter-spacing: .2px; }
+    .sub { color: #8b98a9; font-size: 11px; margin-bottom: 10px; }
+    label { display: block; margin-top: 8px; color: #9fb0c5; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+    select, button { width: 100%; margin-top: 4px; background: #161d29; color: #d7dde5; border: 1px solid #2a3547;
+      border-radius: 6px; padding: 6px 8px; font: inherit; }
+    .row { display: flex; gap: 8px; } .row > * { flex: 1; }
+    #stats { margin-top: 12px; padding-top: 10px; border-top: 1px solid #253044; font-variant-numeric: tabular-nums; }
+    #stats div { display: flex; justify-content: space-between; gap: 10px; padding: 2px 0; }
+    #stats b { color: #fff; font-weight: 600; }
+    .ok { color: #3fb950; } .warn { color: #d29922; }
+    #foot { position: fixed; bottom: 12px; left: 14px; color: #5c6b80; font-size: 11px; }
+  </style>
+  <script type="importmap">
+    { "imports": {
+        "three": "https://unpkg.com/three@0.169.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.169.0/examples/jsm/"
+    } }
+  </script>
+</head>
+<body>
+<div id="app"></div>
+<div id="hud">
+  <h1>print-orient-lab</h1>
+  <div class="sub">exact minimum-overhang build orientation</div>
+  <label>Model</label>
+  <select id="mesh"></select>
+  <label>Overhang threshold <span id="thetaLabel">45°</span></label>
+  <input id="theta" type="range" min="10" max="80" step="1" value="45" style="width:100%" />
+  <div class="row" style="margin-top:10px">
+    <button id="authored">As authored (+Z)</button>
+    <button id="optimal">Optimal</button>
+  </div>
+  <div id="stats">
+    <div><span>overhang ratio</span><b id="ratio">–</b></div>
+    <div><span>optimal ratio</span><b id="best">–</b></div>
+    <div><span>ratio if sampled 512×</span><b id="sampled">–</b></div>
+    <div><span>candidates</span><b id="cand">–</b></div>
+    <div><span>node fingerprint</span><b id="fp">–</b></div>
+  </div>
+</div>
+<div id="foot">drag to orbit · scroll to zoom · red faces are down-facing at the current threshold</div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>
